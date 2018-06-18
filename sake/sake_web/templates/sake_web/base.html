@@ -1,0 +1,45 @@
+{% load i18n static %}
+<!DOCTYPE html>{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="{% static 'sake_web/css/bootstrap.min.css' %}">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+{% block extra_css %}{% endblock %}
+<title>{% block title %}日本酒.com{% endblock %}</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/sake/top/"><i class="fa d-inline fa-lg fa-cloud"></i><b>  日本酒.com</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'sake_web:user_detail' user.pk %}">ユーザー情報閲覧</a>
+          </li>
+          {% endif %}
+        </ul>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="http://127.0.0.1:8000/sake/signup/"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
+      </div>
+    </div>
+  </nav>
+
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+
+<script src="{% static 'sake_web/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'sake_web/js/bootstrap.bundle.min.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

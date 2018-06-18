@@ -1,0 +1,56 @@
+{% extends "sake_web/base.html" %}
+{% block title %}日本酒{% endblock title %}
+{% load bootstrap4 %}
+{% block content %}
+      <div class="container">
+        <div class="jumbotron jumbotron-fluid bg-white text-center border border-dark rounded">
+          <div class="container">
+            <h2 class="display-4">日本酒を探そう</h2>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          </div>
+        </div>
+        <div class="row">
+          {% load static %}
+          {% for sake in sakes %}
+           <div class="col-md-4 ">
+             <div class="card mb-4 border border-dark">
+               <img class="card-img-top" src="{{ sake.img_path }}" alt="Card image cap">
+               <div class="card-body">
+                 <h3 class="card-text">{{ sake.name }}</h3>
+                 <p class="card-text">{{ sake.comment }}</p>
+                 <span class="card-text">酒蔵:{{ sake.creater }}  </span>
+                 <span class="card-text">地域:{{ sake.region }}  </span>
+                 <span class="card-text">種類:{{ sake.sake_type }}  </span>
+                 <div class="d-flex justify-content-between align-items-center">
+                   <div class="btn-group">
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳しく</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+        {% endfor %}
+        </div>
+        {{ sake.id }}
+    <a class="btn btn-success" data-toggle="modal" data-target="#basicModal">検索</a>
+    <div class="modal fade"id="basicModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"id="myModalLabel">日本酒を探す</h4>
+          </div>
+          <div class="modal-body">
+            <form action='' method='POST'>
+              {% csrf_token %}
+              {% bootstrap_form form layout='horizontal' %}
+              <div class="form-group row">
+                <div class="offset-md-3 col-md-9">
+                  <button type="submit" class="btn btn-primary">送信</button>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
