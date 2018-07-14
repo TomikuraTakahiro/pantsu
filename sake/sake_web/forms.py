@@ -8,7 +8,7 @@ class SearchSakeForm(forms.ModelForm):
     """酒検索のフォーム"""
     class Meta:
         model = sake
-        fields = ('name','creater')
+        fields = ('name','creater','region','created_type','sake_type','dosu','karasa')
 
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""
