@@ -1,0 +1,51 @@
+{% extends "sake_web/base.html" %}
+{% block title %}日本酒{% endblock title %}
+{% load bootstrap4 %}
+{% block content %}
+        <!--<div class="row">
+           <div class="col-md-4 ">
+             <div class="card mb-4 border border-dark">
+               <img class="card-img-top" src="{{ sake.img_path }}" alt="Card image cap">
+               <div class="card-body">
+                 <p class="card-text">{{ sake.comment }}</p>
+                 <span class="card-text">{{ sake.creater }}  </span>
+                 <span class="card-text">地域:{{ sake.instance.get_region_display }}  </span>
+                 <span class="card-text">種類:{{ sake.sake_type }}  </span>
+                 <div class="d-flex justify-content-between align-items-center">
+                 </div>
+               </div>
+             </div>
+           </div>
+        </div>
+        <div class="py-5 bg-light"> -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="card-text">{{ sake.name }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="align-self-center text-md-right text-center col-md-4">
+          <h3 class="text-primary">蔵元</h3>
+          <p class="mb-5">{{ sake.creater }}
+          <h3 class="text-primary">都道府県</h3>
+          <p class="mb-5">{{ sake.region }} </p>
+          <h3 class="text-primary">Connect</h3>
+          <p class="">In-app chat panel 24/7 active.
+            <br>The support you need, right there.</p>
+        </div>
+        <div class="my-3 col-md-4">
+          <img class="img-fluid d-block ml-1 mx-auto" src="{{ sake.img_path }}">
+        </div>
+          <!--<img class="img-fluid d-block ml-1 mx-auto" src="https://pingendo.github.io/templates/sections/assets/iphone_features.png"> </div>-->
+        <div class="align-self-center text-md-left text-center col-md-4">
+          <h3 class="text-primary">種類</h3>
+          <p class="mb-5">{{ sake.sake_type }}</p>
+          <h3 class="text-primary">Multilayers</h3>
+          <p class="mb-5">Work simultaneously on different panels with the switcher</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

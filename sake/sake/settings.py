@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sake_web',
     'bootstrap4',
+    'accounts.apps.AccountsConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -71,9 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sake.wsgi.application'
 
-AUTH_USER_MODEL = 'sake_web.User'
-LOGIN_URL = 'ragistration:login'
-LOGIN_REDIRECT_URL = 'sake_web:top'
+AUTH_USER_MODEL = 'auth.User'
+LOGOUT_REDIRECT_URL = '/sake/top'
+LOGIN_REDIRECT_URL = '/sake/top'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

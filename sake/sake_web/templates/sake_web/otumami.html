@@ -1,0 +1,22 @@
+{% extends "sake_web/base.html" %}
+{% block title %}おつまみ{% endblock title %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-fluid bg-white text-center border border-dark rounded">
+    <div class="container">
+      <h2 class="display-4">おつまみを探そう</h2>
+    </div>
+  </div>
+<div class="row">
+  {% load static %}
+  {% for otumami in otumamis %}
+   <div class="col-md-4 ">
+     <div class="card mb-4 border border-dark">
+         <h3 class="card-text">{{ otumami.name }}</h3>
+      </div>
+    </div>
+{% endfor %}
+</div>
+<a class="btn btn-success" data-toggle="modal" data-target="#basicModal">検索</a>
+{% endblock content %}

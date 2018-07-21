@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
-from sake_web.models import sake,User
+from sake_web.models import sake,otumami
 from sake_web.forms import SearchSakeForm
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -14,9 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
-from django.views import generic
 from .forms import (
-    LoginForm, UserUpdateForm
+    LoginForm
 )
 
 User = get_user_model()
@@ -53,16 +52,23 @@ def sake_list(request):
                      {'form':form,'sakes': Sakes}
                      ,RequestContext(request))
 
-def sake_detail(request):
-    """酒の詳細"""
-    return render(request,
-                  'sake_web/sake_search.html',
-                    {'sakes': Sakes})
-
 def mypage(request):
     """マイページ"""
     return render(request,
                   'sake_web/mypage.html')
+
+def otumami_list(request):
+
+    Otumamis = otumami.objects.all().order_by('id')
+    return render(request,
+              'sake_web/otumami.html',
+             {'otumamis': Otumamis}
+             ,RequestContext(request))
+
+class sake_detail(generic.DetailView):
+    model = sake
+    """酒の詳細"""
+    template_name = 'sake_web/sake_detail.html'
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
@@ -73,7 +79,6 @@ class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
     template_name = 'registration/login.html'
-
 
 class Logout(LoginRequiredMixin, LogoutView):
     """ログアウトページ"""
@@ -90,12 +95,3 @@ class OnlyYouMixin(UserPassesTestMixin):
 class UserDetail(OnlyYouMixin, generic.DetailView):
     model = User
     template_name = 'sake_web/user_detail.html'
-
-
-class UserUpdate(OnlyYouMixin, generic.UpdateView):
-    model = User
-    form_class = UserUpdateForm
-    template_name = 'sake_web/user_form.html'
-
-    def get_success_url(self):
-        return resolve_url('sake_web:user_detail', pk=self.kwargs['pk'])
